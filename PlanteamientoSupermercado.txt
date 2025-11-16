@@ -1,0 +1,80 @@
+Ejercicio de practica para psp usando Hilos.
+Uso de semáforos, incluido mutex para gestión de zona de recursos compartidos.
+Clase Generadoras(Clientes comprando productos).
+Clase consumidoras(Cajeros cobrando productos).
+Clase Cliente (ambientado en un supermercado)
+Clase Supermercado (main).
+
+A. Planteamiento del ejercicio.
+1.- Clientes:
+    1.1.- 100 clientes como máximo (Generadores)
+    1.2.- Cada cliente tiene de 1-10 productos con valor de 0.1-50 € (array doubles)
+    1.3.- Una única cola de clientes (recurso compartido?)
+    
+2.- Cajeros 
+    2.1.- Existen 5 cajeros (Consumidores)
+    2.2.- Cada cajero tiene una caja única donde guarda el valor de las compartidos
+    2.3.- Existe una caja común donde se ve la suma del valor de todos los productos 
+    comprados en distintas cajas.
+
+3.- Tiempos
+    3.1.- Los clientes llegan entre 10-30 msg
+    3.2.- Los cajeros atienden un cliente cada 500-1000msg
+
+4.- Resultado
+    4.1.- Queremos saber el valor de cada caja individual y el valor de la caja común, 
+    una vez hayan pasado todos los clientes.
+
+B. Desarrollo de la lógica del ejercicio
+1.- Clase Cliente
+    1.1.- Carro de compra que será un array double, 
+    que incluya los productos y el precio con Random.Math
+    1.2.- Este se genera en el constructor
+
+2.- RecaudacionDiaria (Recuros compartido)
+    2.1.- Cola de clientes con Queue<Cliente> cola = new LinkedList<Cliente>()
+    2.2.- Función .add() para añadir el cliente a la queue
+    2.3.- Función .poll() para sacar a el cliente de la queue 
+        (Esto significa que eliminas el primer elemento de la cola,que siempre va a ser el cliente que se acaba de atender)
+    2.4.- Semáforos
+        2.4.1.- SemáforoCajaComun iniciado a 1, para asegurar la caja común 
+            (asegura la entrada de "1 a 1" en la zona critica / recurso compartido).
+        2.4.2.- SemáforoControlClientes iniciado a 0, para controlar la entrada 
+            de los clientes a la cola (está a 0 porque aun no ha llegado ninguno)
+    2.5.- RecaudacionTotal es un double que suma la recaudación de las distintas cajas.
+    2.6.- Variable igualada a la cantidad de clientes Máximos generados, 
+        para saber cuando la cja "cierra la jornada"
+    2.7.- Metodo encolarCliente -> Devolverá un cliente
+        2.7.1.- Agrega un cliente a la cola -> Cola.add(cliente)
+        2.7.2.- SemáforoControlClientes.Release() 
+    2.8.- Método atenderCliente() -> devuelve un cliente
+        2.8.1.- SemáforoControlClientes.adquire()
+        2.8.2.- cola.poll(cliente)
+        2.8.3.- clientes_max--
+    2.9.- actualizarRecudacion()
+        2.9.1.- SemáforoCajaComun.adquire()
+        2.9.2.- actualizarrecaudacion
+        2.9.3.- SemáforoCajaComun.Release()
+
+3.- Hilo GeneradorClientes (Productor/Generador)
+    3.1.- Contiene el recurso compartido cola
+    3.2.- metodo run()
+        3.2.1.- Crea cliente
+        3.2.2.- Agrega al recurso cola
+        3.2.3.- Simula la espera en 20-50 msg
+
+4.- Hilo Cajero (Cosumidor)
+    4.1.- Contiene el recurso compartido controlar clientes
+    4.2.- Metodo run()
+        4.2.1.- Simulamos bucle while (cliente_max>0)
+            4.2.1.1.- llamamos a recurso.atenderCliente()
+            4.2.1.2.- Guardamos el valor de la compra del cliente
+            4.2.1.3.- wait() para simular el tiempo de atenderCliente
+        4.2.2.- Fuera del bucle, imprimes valor del cajero
+
+5.- Clase Supermercado (Hilo Main)
+    5.1.- Inicializas constantes, clientes_max, tiempos de espera, etc
+    5.2.- Creas el recurso compartido RecaudacionDiaria con 100 clientes.
+    5.3.- Creas el productor/generador (GeneradorClientes) y los lanzamos
+    5.4.- Creas 5 Consumidores (Cajeros) y los lanzamos
+    5.5.- Cunado se termine la ejecucion de Cajeros sumamos el total y lo imprimimos.
