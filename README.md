@@ -94,7 +94,7 @@ git clone https://github.com/Nonit0/SupermercadoPSP.git
 
 4.2. Compilar los archivos .java:
 ```bash
-cd Hilos/supermercado
+cd Gestion-de-MultiHilos-Supermercado/
 javac *.java
 ```
 
