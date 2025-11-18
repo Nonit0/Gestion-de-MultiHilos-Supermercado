@@ -131,6 +131,7 @@ System.out.println(coloresTexto.B_GREEN + "Recaudación total: 1234.56€" + col
 ```
 
 ## 6.- Ejemplo de ejecución
+6.1.- Capturas de pantalla sobre la ejecución:
 <img width="788" height="883" alt="1super" src="https://github.com/user-attachments/assets/fa3aecd0-ff5f-48aa-8290-b274f77a04ce" />
 <img width="787" height="883" alt="super2" src="https://github.com/user-attachments/assets/069b8b34-604c-4791-aed1-e39807543938" />
 <img width="787" height="884" alt="super3" src="https://github.com/user-attachments/assets/6be32a26-f0b1-41a3-a52e-4b0e24f5a3bf" />
