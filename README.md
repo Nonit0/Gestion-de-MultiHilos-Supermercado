@@ -130,7 +130,7 @@ System.out.println(coloresTexto.B_MAGENTA + "=== RESULTADOS FINALES ===" + color
 System.out.println(coloresTexto.B_GREEN + "Recaudación total: 1234.56€" + coloresTexto.RESET);
 ```
 
-## 7.- Licencia
+## 6.- Licencia
 Este proyecto es educativo, para práctica de programación concurrente en Java.
 Se puede copiar, modificar y redistribuir libremente para fines de aprendizaje.
 
