@@ -130,7 +130,14 @@ System.out.println(coloresTexto.B_MAGENTA + "=== RESULTADOS FINALES ===" + color
 System.out.println(coloresTexto.B_GREEN + "Recaudación total: 1234.56€" + coloresTexto.RESET);
 ```
 
-## 6.- Licencia
+## 6.- Ejemplo de ejecución
+<img width="495" height="293" alt="ejecucionSuper1" src="https://github.com/user-attachments/assets/f7f5062b-b950-4fac-8c0e-6e963697a684" />
+<img width="582" height="323" alt="ejecucionSuper2" src="https://github.com/user-attachments/assets/854cacb3-a4dc-4147-b05c-32eb1ebdebcb" />
+<img width="566" height="364" alt="ejecucionSuper3" src="https://github.com/user-attachments/assets/25a18258-087a-48f6-a3ef-130edc40b951" />
+<img width="525" height="290" alt="ejecucionSuper4" src="https://github.com/user-attachments/assets/c051559f-e816-487b-a455-9b4058fe82dd" />
+
+
+## 7.- Licencia
 Este proyecto es educativo, para práctica de programación concurrente en Java.
 Se puede copiar, modificar y redistribuir libremente para fines de aprendizaje.
 
