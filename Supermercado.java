@@ -33,10 +33,16 @@ public class Supermercado {
         // 1.2.6.- Imprimimos los resultado finales
         System.out.println(coloresTexto.B_MAGENTA+"\n=== RESULTADOS FINALES ==="+coloresTexto.RESET);
         double total = 0; // Variable para guardar el total ganado en los cajeros
+        
         for (CajeroConsumidor c : cajeros) { // Bucle para recorrer los cajeros y sacar de manera individual el dinero que han ganado
-            System.out.println(coloresTexto.B_MAGENTA+"Cajero " + c.getIdCajero() + " recaudó: " +c.getCajaPropia() + "€"+coloresTexto.RESET);
+            String cajaPropia2d = String.format("%.2f", c.getCajaPropia()); // Convertir a String con 2 decimales para mostrar siempre como XX.XX (cajaPropia)
+            System.out.println(coloresTexto.B_MAGENTA+"Cajero " + c.getIdCajero() + " recaudó: " +cajaPropia2d + "€"+coloresTexto.RESET);
             total += c.getCajaPropia();
         }
-        System.out.println(coloresTexto.B_GREEN+"\nRecaudación total del supermercado: " +recursoCompartido.getRecaudacionTotal() + "€"+coloresTexto.RESET); // Imprimimos el total ganado por los cajeros
+
+        String recaudaciuonTotal2d = String.format("%.2f", recursoCompartido.getRecaudacionTotal()); // Convertir a String con 2 decimales para mostrar siempre como XX.XX (RecaudacionTotal)
+
+        System.out.println(coloresTexto.B_GREEN+"\nRecaudación total del supermercado: " +recaudaciuonTotal2d + "€"+coloresTexto.RESET); // Imprimimos el total ganado por los cajeros
     }
+    
 }

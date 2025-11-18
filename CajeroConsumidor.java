@@ -17,6 +17,7 @@ public class CajeroConsumidor extends Thread {
     // 1.3.- Método Run para ejecutar el Productor
     @Override
     public void run() {
+
         // 1.3.1.- While(true), se ejecuta siempre 
         while (true) {
             if (recurso.getClientesRestantes() <= 0) break; // Para salir del while, comprobar si siguen existiendo clientes, cuando no haya sale del bucle
@@ -28,13 +29,15 @@ public class CajeroConsumidor extends Thread {
                 cajaCajero += totalCliente; // Suma al cajero individual
                 recurso.actualizarRecaudacionTotal(totalCliente); // Suma al cajero común el total gastado del cliente (zona crítica)
 
+            String totalCliente2d = String.format("%.2f", totalCliente); // Convertir a String con 2 decimales para mostrar siempre como XX.XX (cliente)
+
             // 1.3.1.2.- Esto es simplemente para cambiar el siso y que se vea mas bonito y ver como van entrando a las cajas por terminal
             if (cliente.getId()<=9) {
-                System.out.println(coloresTexto.B_RED + "Cajero " + idCajero + " atendió al cliente Nº00" +cliente.getId() + " | Total compra: " + totalCliente + "€"+coloresTexto.RESET );
+                System.out.println(coloresTexto.B_RED + "Cajero " + idCajero + " atendió al cliente Nº00" +cliente.getId() + " | Total compra: " + totalCliente2d + "€"+coloresTexto.RESET );
             }else if(cliente.getId()<=99){
-                System.out.println(coloresTexto.B_RED + "Cajero " + idCajero + " atendió al cliente Nº0" +cliente.getId() + " | Total compra: " + totalCliente + "€"+coloresTexto.RESET );
+                System.out.println(coloresTexto.B_RED + "Cajero " + idCajero + " atendió al cliente Nº0" +cliente.getId() + " | Total compra: " + totalCliente2d + "€"+coloresTexto.RESET );
             }else{
-                System.out.println(coloresTexto.B_RED + "Cajero " + idCajero + " atendió al cliente Nº" +cliente.getId() + " | Total compra: " + totalCliente + "€"+coloresTexto.RESET );
+                System.out.println(coloresTexto.B_RED + "Cajero " + idCajero + " atendió al cliente Nº" +cliente.getId() + " | Total compra: " + totalCliente2d + "€"+coloresTexto.RESET );
             }
 
 
@@ -46,8 +49,10 @@ public class CajeroConsumidor extends Thread {
             }
             
         }    
-        // 1.2.- Avisamos cuando hayan pasados todos los clientes por caja
-        System.out.println(coloresTexto.W_BEIGE + "Cajero " + idCajero + " terminó su jornada. Caja propia: " + cajaCajero + "€"+coloresTexto.RESET);
+        String cajaCajero2d = String.format("%.2f", cajaCajero); // Convertir a String con 2 decimales para mostrar siempre como XX.XX (cajaCajero)
+
+        // 1.3.2.- Avisamos cuando hayan pasados todos los clientes por caja
+        System.out.println(coloresTexto.W_BEIGE + "Cajero " + idCajero + " terminó su jornada. Caja propia: " + cajaCajero2d + "€"+coloresTexto.RESET);
     }
 
     // Getter de la caja
